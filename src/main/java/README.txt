@@ -12,4 +12,3 @@ Between races you can do one of the following things each day:
 6. Upgrade car structure
 7. Scout out your opponents
 On race days you will be in the stands and won't be able to control the car cuz i dont have time for ts
-test from
