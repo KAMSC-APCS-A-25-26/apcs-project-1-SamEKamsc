@@ -2,21 +2,28 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
 public class TextAdventure {
     public static void main(String[] args) throws Exception {
-        TextAdventure.main_menu();
+        String name = TextAdventure.main_menu();
         TextAdventure.choose_difficulty();
+        Player player = new Player(name);
         Enemy_driver enemy_one = new Enemy_driver();
         Enemy_driver enemy_two = new Enemy_driver();
         Enemy_driver enemy_three = new Enemy_driver();
         System.out.println(Arrays.toString(enemy_one.stats));
-        System.out.println(Arrays.toString(enemy_one.scout()));
-        System.out.println(Arrays.toString(enemy_one.scout()));
-        System.out.println(Arrays.toString(enemy_one.scout()));
-        System.out.println(Arrays.toString(enemy_one.scout()));
+        System.out.println(Arrays.toString(enemy_two.stats));
+        System.out.println(Arrays.toString(enemy_three.stats));
+        int cont = 1;
+        int day = 0;
+        while (cont == 1) {
+            int[] ret = GameLoop.week_cycler(day);
+            day = ret[0];
+            cont = ret[1];
+        }
     }
 
-    public static void main_menu() throws Exception {
+    public static String main_menu() throws Exception {
         // Declare Scanners
         Scanner sc = new Scanner(System.in);
         Scanner readme_sc = new Scanner(new File("src/main/java/README.txt"));
@@ -32,7 +39,8 @@ public class TextAdventure {
         System.out.println("=======================================");
         System.out.println("Welcome to the RACE!");
         // Main menu switch case of play or how to play
-        var choice_one = 0;
+        int choice_one = 0;
+        String name = "";
         while (choice_one != 1) {
             System.out.println("--------------");
             System.out.println("1. Play");
@@ -41,7 +49,9 @@ public class TextAdventure {
             choice_one = sc.nextInt();
             switch (choice_one) {
                 case 1:
-                    System.out.println("run");
+                    System.out.println("---------------------");
+                    System.out.print("Enter your name: ");
+                    name = sc.next();
                     break;
                 case 2:
                     System.out.println();
@@ -55,11 +65,14 @@ public class TextAdventure {
                     break;
             }
         }
+        readme_sc.close();
+        return name;
     }
 
     public static void choose_difficulty() throws Exception {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Difficulties");
+        System.out.println("-----------------");
+        System.out.println("Choose Difficuly");
         System.out.println("1. Easy");
         System.out.println("2. Normal");
         System.out.println("3. Hard");
@@ -70,17 +83,22 @@ public class TextAdventure {
                 System.out.println("Easy Mode (wimp)");
                 Globals.bank_account = 1500;
                 Globals.difficulty_modifier = 0;
+                Globals.day = 0;
                 break;
             case 2:
                 System.out.println("Normal Mode");
                 Globals.bank_account = 1000;
                 Globals.difficulty_modifier = 2;
+                Globals.day = 0;
                 break;
             case 3:
-                System.out.println("Hard Mode (Good boy)");
+                System.out.println("Hard Mode");
                 Globals.bank_account = 500;
                 Globals.difficulty_modifier = 4;
+                Globals.day = 0;
                 break;
         }
     }
+
+    
 }
