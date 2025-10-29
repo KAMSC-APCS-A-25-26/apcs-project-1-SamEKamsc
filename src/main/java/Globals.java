@@ -1,4 +1,5 @@
 public class Globals {
+    public static int day = 0;
     public static int bank_account = 0;
     public static int difficulty_modifier = 0;
 
@@ -9,4 +10,5 @@ public class Globals {
     public static int car_motor = 0;
     public static int car_aerodynamics = 0;
     public static int car_structure = 0;
+    public int[] stats = {0, 0, 0, 0, 0, 0};
 }

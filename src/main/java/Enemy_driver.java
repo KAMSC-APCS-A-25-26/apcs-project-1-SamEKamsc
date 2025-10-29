@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Arrays;
 public class Enemy_driver {
     // Array here for easier access: fitness, intelligence, skill, motor, aerodynamics, structure
     public int[] stats = {0, 0, 0, 0, 0, 0};
@@ -11,15 +10,17 @@ public class Enemy_driver {
         }
     }
 
-    public int[] scout() {
+    public void scout() {
         Random rd = new Random();
-        int[] chosen_stats = {-1, -1, -1, -1, -1, -1};
+        String[] part = {"driver fitness", "driver intelligence", "driver skill", "car motor", "car aerodynamics", "car structure"};
         for (int i = 0; i < 6; i++) {
             if (rd.nextBoolean()) {
-                chosen_stats[i] = this.stats[i];
+                System.out.println("enemy " + part[i] + ": " + this.stats[i]);
+            }
+            else {
+                System.out.println("enemy " + part[i] + ": not found");
             }
         }
-        return chosen_stats;
     }
 
 
