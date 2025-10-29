@@ -5,6 +5,10 @@ public class TextAdventure {
     public static void main(String[] args) throws Exception {
         TextAdventure.main_menu();
         TextAdventure.choose_difficulty();
+        Enemy_driver enemy_one = new Enemy_driver();
+        Enemy_driver enemy_two = new Enemy_driver();
+        Enemy_driver enemy_three = new Enemy_driver();
+        System.out.println(enemy_one.scout());
     }
 
 
@@ -60,17 +64,19 @@ public class TextAdventure {
         switch (choice) {
             case 1:
                 System.out.println("Easy Mode (wimp)");
-                Globals.difficulty = 1;
+                Globals.bank_account = 1500;
+                Globals.difficulty_modifier = 0;
                 break;
             case 2:
                 System.out.println("Normal Mode");
-                Globals.difficulty = 2;
+                Globals.bank_account = 1000;
+                Globals.difficulty_modifier = 2;
                 break;
             case 3:
                 System.out.println("Hard Mode (Good boy)");
-                Globals.difficulty = 3;
+                Globals.bank_account = 500;
+                Globals.difficulty_modifier = 4;
                 break;
         }
-        System.out.println(Globals.difficulty);
     }
 }
