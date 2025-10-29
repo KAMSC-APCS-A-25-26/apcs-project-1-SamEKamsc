@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TextAdventure {
@@ -8,9 +9,12 @@ public class TextAdventure {
         Enemy_driver enemy_one = new Enemy_driver();
         Enemy_driver enemy_two = new Enemy_driver();
         Enemy_driver enemy_three = new Enemy_driver();
-        System.out.println(enemy_one.scout());
+        System.out.println(Arrays.toString(enemy_one.stats));
+        System.out.println(Arrays.toString(enemy_one.scout()));
+        System.out.println(Arrays.toString(enemy_one.scout()));
+        System.out.println(Arrays.toString(enemy_one.scout()));
+        System.out.println(Arrays.toString(enemy_one.scout()));
     }
-
 
     public static void main_menu() throws Exception {
         // Declare Scanners
