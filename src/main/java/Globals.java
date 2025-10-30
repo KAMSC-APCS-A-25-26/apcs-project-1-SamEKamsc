@@ -1,14 +1,18 @@
 public class Globals {
+    // Global Variables
+    public static String team_name = "";
     public static int day = 0;
     public static int bank_account = 0;
     public static int difficulty_modifier = 0;
+    public static Player player;
+    public static Enemy_team enemy_one;
+    public static Enemy_team enemy_two;
+    public static Enemy_team enemy_three;
+    
+    // Extra Credit Choice Tracker
+    public static String[] tracker;
+    public static void tracker_printer() {
+        // print out stuff ig
+    }
 
-    // Car and Driver Stats
-    public static int driver_fitness = 0;
-    public static int driver_intelligence = 0;
-    public static int driver_skill = 0;
-    public static int car_motor = 0;
-    public static int car_aerodynamics = 0;
-    public static int car_structure = 0;
-    public int[] stats = {0, 0, 0, 0, 0, 0};
 }
