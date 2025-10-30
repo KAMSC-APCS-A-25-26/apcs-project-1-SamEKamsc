@@ -16,11 +16,10 @@ public class TextAdventure {
             int[] ret = GameLoop.week_cycler(day);
             day = ret[0];
             cont = ret[1];
-            GameLoop.day_menu();
         }
     }
 
-    public static String main_menu() throws Exception {
+    public static void main_menu() throws Exception {
         // Declare Scanners
         Scanner sc = new Scanner(System.in);
         Scanner readme_sc = new Scanner(new File("README.txt"));
@@ -37,7 +36,7 @@ public class TextAdventure {
         System.out.println("Welcome to the RACE!");
         // Main menu switch case of play or how to play
         int choice_one = 0;
-        String name = "";
+
         while (choice_one != 1) {
             System.out.println("--------------");
             System.out.println("1. Play");
@@ -47,9 +46,10 @@ public class TextAdventure {
             System.out.println();
             switch (choice_one) {
                 case 1:
+                    Scanner special = new Scanner(System.in).useDelimiter("[\n]+");
                     System.out.println("---------------------");
                     System.out.print("Enter your team name: ");
-                    name = sc.next();
+                    Globals.team_name = special.next();
                     break;
                 case 2:
                     System.out.println();
@@ -64,17 +64,16 @@ public class TextAdventure {
             }
         }
         readme_sc.close();
-        return name;
     }
 
     public static void choose_difficulty() throws Exception {
         Scanner sc = new Scanner(System.in);
         System.out.println("-----------------");
-        System.out.println("Choose Difficuly");
+        System.out.println("Choose Difficulty");
         System.out.println("1. Easy");
         System.out.println("2. Normal");
         System.out.println("3. Hard");
-        System.out.println("Enter your choice: ");
+        System.out.print("Enter your choice: ");
         int choice = sc.nextInt();
         System.out.println();
         switch (choice) {

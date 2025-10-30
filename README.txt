@@ -15,8 +15,8 @@ Between races you can do one of the following things each day:
     b. Upgrade car aerodynamics
     c. Upgrade car structure
 3. Scout out your opponents
-4. Manage Sponserships
-    a. view sponsers
-    b. get a new sponser
-    c. create a sponsered video with driver (decreasing drivers stats)
+4. Manage Sponsorships
+    a. view sponsors
+    b. get a new sponsor
+    c. create a sponsored video with driver (decreasing drivers stats)
 As the manager you don't control the car or crew during the race.

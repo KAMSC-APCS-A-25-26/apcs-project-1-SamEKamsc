@@ -11,8 +11,12 @@ public class GameLoop {
         int cont = 1;
         if (next_day==7) {
             next_day = 0;
+            race_day();
         }
-        if (Globals.day == 10) {
+        else {
+            day_menu();
+        }
+        if (Globals.bank_account <= 0) {
             cont = 0;
         }
         int[] ret = {next_day, cont};
@@ -22,18 +26,21 @@ public class GameLoop {
     public static void day_menu() {
         // Sets up Scanner, Prints prompt, and takes in prompt
         Scanner sc = new Scanner(System.in);
-        System.out.println("Weekly Development options");
-        System.out.println("1. Develop Driver");
-        System.out.println("2. Develop Car");
-        System.out.println("3. Scout Opponents (-$250)");
-        System.out.println("4. Manage Sponsers");
-        System.out.println("5. See Stats (won't take the day)");
         int choice;
-        do { 
+        do {
+            System.out.println("--------------------");
+            System.out.println("Weekly Development options");
+            System.out.println("1. Develop Driver");
+            System.out.println("2. Develop Car");
+            System.out.println("3. Scout Opponents (-$250)");
+            System.out.println("4. Manage Sponsors");
+            System.out.println("5. See Stats (won't take the day)");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
             if (choice == 5) {
+                System.out.println(Globals.team_name + "'s Stats");
+                System.out.println("Bank Account: $" + Globals.bank_account);
                 Globals.player.show_stats();
             }
         } while (choice < 1 || choice > 4);
@@ -49,7 +56,7 @@ public class GameLoop {
                 scout_opponents();
                 break;
             case 4:
-                manage_sponsers();
+                manage_sponsors();
                 break;
         }
         
@@ -99,6 +106,7 @@ public class GameLoop {
         System.out.println("1. " + Globals.enemy_one.name);
         System.out.println("2. " + Globals.enemy_two.name);
         System.out.println("3. " + Globals.enemy_three.name);
+        Globals.bank_account -= 250;
         int choice;
         do { 
             System.out.print("Enter your choice: ");
@@ -110,8 +118,13 @@ public class GameLoop {
         enemy_teams[choice-1].scout();
     }
 
-    // 4. Manage Sponsers
-    public static void manage_sponsers() {
+    // 4. Manage Sponsors
+    public static void manage_sponsors() {
         
+    }
+
+    // Race Days
+    public static void race_day() {
+
     }
 }
