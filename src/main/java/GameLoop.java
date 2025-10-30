@@ -16,7 +16,7 @@ public class GameLoop {
         else {
             day_menu();
         }
-        if (Globals.bank_account <= 0) {
+        if (Globals.bank_account <= 0 || Globals.races_lost == 3) {
             cont = 0;
         }
         int[] ret = {next_day, cont};
@@ -38,11 +38,6 @@ public class GameLoop {
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
-            if (choice == 5) {
-                System.out.println(Globals.team_name + "'s Stats");
-                System.out.println("Bank Account: $" + Globals.bank_account);
-                Globals.player.show_stats();
-            }
         } while (choice < 1 || choice > 4);
         // Switch cases the choice to go to sub menus
         switch (choice) {
@@ -120,7 +115,55 @@ public class GameLoop {
 
     // 4. Manage Sponsors
     public static void manage_sponsors() {
-        
+        // Sets up Scanner, Prints prompt, and takes in prompt
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Manage Sponsors:");
+        System.out.println("1. Add Sponsor (" + Globals.number_of_sponsors + "/3)");
+        System.out.println("2. Create Sponsored Video (+$250)");
+        int choice;
+        do { 
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+        } while (choice < 1 || choice > 2);
+        // shows the stats based on input
+    }
+
+    // 5. View Stats
+    public static void see_stats() {
+        // Sets up Scanner, Prints prompt, and takes in prompt
+        Scanner sc = new Scanner(System.in);
+        System.out.println("View Stats");
+        System.out.println("1. Sponsorships");
+        System.out.println("2. Driver Stats");
+        System.out.println("3. Bank Account");
+        int choice;
+        do { 
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+        } while (choice < 1 || choice > 3);
+        // shows the stats based on input
+        switch (choice) {
+            case 1:
+                System.out.println(Globals.team_name + "'s Sponsorships");
+                for (int i = 0; i < 7; i++) {
+                    if (Globals.sponsors_days_left[i] != 0) {
+                        System.out.println("Sponsor: " + Globals.sponsors_names[i]);
+                        System.out.println("  Pay: " + Globals.sponsors_pay_amount[i]);
+                        System.out.println("  Days left:" + Globals.sponsors_days_left[i]);
+                    }
+                }
+                break;
+            case 2:
+                System.out.println(Globals.team_name + "'s Drivers Stats");
+                Globals.player.show_stats();
+                break;
+            case 3:
+                System.out.println(Globals.team_name + "'s Bank Account:" + Globals.bank_account);
+                break;
+
+        }
     }
 
     // Race Days

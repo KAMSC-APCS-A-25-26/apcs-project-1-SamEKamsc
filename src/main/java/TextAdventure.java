@@ -10,6 +10,7 @@ public class TextAdventure {
         Globals.enemy_one = new Enemy_team("Polytrack Pitmasters");
         Globals.enemy_two = new Enemy_team("Houtrouw Hyperdrivers");
         Globals.enemy_three = new Enemy_team("Afsal Accelerators");
+        Globals.enemy_four = new Enemy_team("Coding Cornercutters");
         int cont = 1;
         int day = 0;
         while (cont == 1) {
@@ -49,7 +50,7 @@ public class TextAdventure {
                     Scanner special = new Scanner(System.in).useDelimiter("[\n]+");
                     System.out.println("---------------------");
                     System.out.print("Enter your team name: ");
-                    Globals.team_name = special.next();
+                    Globals.team_name = special.nextLine();
                     break;
                 case 2:
                     System.out.println();
