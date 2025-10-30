@@ -1,32 +1,29 @@
 import java.io.File;
-import java.util.Arrays;
 import java.util.Scanner;
 
 
 public class TextAdventure {
     public static void main(String[] args) throws Exception {
-        String name = TextAdventure.main_menu();
+        TextAdventure.main_menu();
         TextAdventure.choose_difficulty();
-        Player player = new Player(name);
-        Enemy_driver enemy_one = new Enemy_driver();
-        Enemy_driver enemy_two = new Enemy_driver();
-        Enemy_driver enemy_three = new Enemy_driver();
-        System.out.println(Arrays.toString(enemy_one.stats));
-        System.out.println(Arrays.toString(enemy_two.stats));
-        System.out.println(Arrays.toString(enemy_three.stats));
+        Globals.player = new Player(Globals.team_name);
+        Globals.enemy_one = new Enemy_team("Polytrack Pitmasters");
+        Globals.enemy_two = new Enemy_team("Houtrouw Hyperdrivers");
+        Globals.enemy_three = new Enemy_team("Afsal Accelerators");
         int cont = 1;
         int day = 0;
         while (cont == 1) {
             int[] ret = GameLoop.week_cycler(day);
             day = ret[0];
             cont = ret[1];
+            GameLoop.day_menu();
         }
     }
 
     public static String main_menu() throws Exception {
         // Declare Scanners
         Scanner sc = new Scanner(System.in);
-        Scanner readme_sc = new Scanner(new File("src/main/java/README.txt"));
+        Scanner readme_sc = new Scanner(new File("README.txt"));
         // Print Title
         System.out.println("=======================================");
         System.out.println("                  THE");
@@ -47,10 +44,11 @@ public class TextAdventure {
             System.out.println("2. How to play");
             System.out.print("Enter your choice: ");
             choice_one = sc.nextInt();
+            System.out.println();
             switch (choice_one) {
                 case 1:
                     System.out.println("---------------------");
-                    System.out.print("Enter your name: ");
+                    System.out.print("Enter your team name: ");
                     name = sc.next();
                     break;
                 case 2:
@@ -78,6 +76,7 @@ public class TextAdventure {
         System.out.println("3. Hard");
         System.out.println("Enter your choice: ");
         int choice = sc.nextInt();
+        System.out.println();
         switch (choice) {
             case 1:
                 System.out.println("Easy Mode (wimp)");
