@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Globals {
     // Player
     public static String team_name = "";
@@ -22,10 +24,27 @@ public class Globals {
     public static int number_of_sponsors = 0;
 
     // Extra Credit Choice Tracker
-    public static String[][] tracker;
+    public static ArrayList<ArrayList<String>> tracker = new ArrayList<>();
+    public static ArrayList<String> week_tracker = new ArrayList<>();
         // ^^ format so { {week#, day#, [place/choice], money_change, final_bank}, {...}, ...}
+    public static void add_day_to_week(String action) {
+        week_tracker.add(action);
+    }
+    
+    public static void add_week_to_tracker() {
+        ArrayList<String> copy = new ArrayList<>(week_tracker);
+        tracker.add(copy);
+        week_tracker.clear();
+    }
+    
     public static void tracker_printer() {
         // print out stuff ig
+        for (int w = 0; w < tracker.size(); w++) {
+            System.out.println("Week " + (w+1) + ":");
+            for (int d = 0; d < tracker.get(w).size(); d++) {
+                System.out.println("  Day " + (w*7 + d+1) + ": " + tracker.get(w).get(d));
+            }
+        }
     }
 
 }

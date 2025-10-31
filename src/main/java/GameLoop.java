@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,12 +15,25 @@ public class GameLoop {
         if (next_day==7) {
             next_day = 0;
             race_day();
+            Globals.add_week_to_tracker();
         }
         else {
             day_menu();
         }
-        if (Globals.bank_account <= 0 || Globals.races_lost == 3) {
+        if (Globals.bank_account <= 0) {
+            System.out.println("You went Bankrupt: Game Over");
             cont = 0;
+            Globals.add_week_to_tracker();
+        }
+        if  (Globals.races_lost == 3) {
+            System.out.println("You Lost 3 Games in a Row: Game Over");
+            cont = 0;
+            Globals.add_week_to_tracker();
+        }
+        if (day == 168) {
+            System.out.println("You Win: Well Done");
+            cont = 0;
+            Globals.add_week_to_tracker();
         }
         int[] ret = {next_day, cont};
         return ret;
@@ -31,7 +45,7 @@ public class GameLoop {
         int choice;
         do {
             System.out.println("--------------------");
-            System.out.println("Weekly Development options");
+            System.out.println("Weekly Development options (Bank: " + Globals.bank_account + ")");
             System.out.println("1. Develop Driver (-$250)");
             System.out.println("2. Develop Car (-$400)");
             System.out.println("3. Scout Opponents (-$250)");
@@ -79,6 +93,8 @@ public class GameLoop {
         // uses the choice to upgrade driver
         Globals.player.stats[choice-1] += 1;
         Globals.bank_account -= 250;
+        String[] action = {"the Gym", "Watch Film", "Practice Driving"};
+        Globals.add_day_to_week("Sent Driver to " + action[choice-1] + " -$250");
     }
 
     // 2. Develop Car
@@ -98,6 +114,8 @@ public class GameLoop {
         // uses the choice to upgrade driver
         Globals.player.stats[choice+2] += 1;
         Globals.bank_account -= 400;
+        String[] action = {"Motor", "Aerodynamics", "Structure"};
+        Globals.add_day_to_week("Upgraded Cars " + action[choice-1] + " -$400");
     }
 
     // 3. Scout Opponents
@@ -109,7 +127,6 @@ public class GameLoop {
         System.out.println("2. " + Globals.enemy_two.name);
         System.out.println("3. " + Globals.enemy_three.name);
         System.out.println("4. " + Globals.enemy_four.name);
-        Globals.bank_account -= 250;
         int choice;
         do { 
             System.out.print("Enter your choice: ");  // UPDATE TS SO THAT IT DOES WHAT IT SAYS IN REAMDE AND MAKE Sure player knows what is out of date
@@ -119,6 +136,8 @@ public class GameLoop {
         // uses the choice to scout chosen team
         Enemy_team[] enemy_teams = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
         enemy_teams[choice-1].scout();
+        Globals.bank_account -= 250;
+        Globals.add_day_to_week("Scouted " + enemy_teams[choice-1].name + " -$250");
     }
 
     // 4. Manage Sponsors
@@ -143,10 +162,12 @@ public class GameLoop {
                 Random rd = new Random();
                 int money = rd.nextInt(200, 301);
                 Globals.bank_account += money;
-                System.out.println("Sponser Advertisment made. Bank +$" + money);
+                System.out.println("Sponsored Advertisment made. Bank +$" + money);
+                Globals.add_day_to_week("Created Sponsored Advertisment +$" + money);
                 break;
         }
     }
+    // menu for choosing which sponsor to get
     public static void choose_sponser() {
         Scanner sc = new Scanner(System.in);
         int amount_chosen = 0;
@@ -180,21 +201,11 @@ public class GameLoop {
             choice = sc.nextInt();
             System.out.println();
         } while (choice < 1 || choice > 3);
-        switch (choice) {
-            case 1:
-                Globals.sponsors_days_left[chosen_sponsors[0]] = Globals.sponsors_pay_days[chosen_sponsors[0]];
-                Globals.number_of_sponsors += 1;
-                break;
-            case 2:
-                Globals.sponsors_days_left[chosen_sponsors[1]] = Globals.sponsors_pay_days[chosen_sponsors[1]];
-                Globals.number_of_sponsors += 1;
-                break;
-            case 3:
-                Globals.sponsors_days_left[chosen_sponsors[2]] = Globals.sponsors_pay_days[chosen_sponsors[2]];
-                Globals.number_of_sponsors += 1;
-                break;
-        }
+        Globals.sponsors_days_left[chosen_sponsors[choice-1]] = Globals.sponsors_pay_days[chosen_sponsors[choice-1]];
+        Globals.number_of_sponsors += 1;
+        Globals.add_day_to_week("Signed Contract with " + Globals.sponsors_names[chosen_sponsors[choice-1]] + " +$" + Globals.sponsors_pay_amount[chosen_sponsors[choice-1]] + " for " + Globals.sponsors_pay_days[chosen_sponsors[choice-1]] + " days");
     }
+    // updates pay and reduces the aamount of day left on a sponsor
     public static void update_sponsor() {
         for (int i = 0; i < 7; i++) {
             if (Globals.sponsors_days_left[i] >= 1) {
@@ -214,7 +225,7 @@ public class GameLoop {
         System.out.println("View Stats");
         System.out.println("1. Sponsorships");
         System.out.println("2. Driver Stats");
-        System.out.println("3. Bank Account");
+        System.out.println("3. See Opponents Stats");
         int choice;
         do { 
             System.out.print("Enter your choice: ");
@@ -238,14 +249,132 @@ public class GameLoop {
                 Globals.player.show_stats();
                 break;
             case 3:
-                System.out.println(Globals.team_name + "'s Bank Account: " + Globals.bank_account);
+                see_opp_stats();
                 break;
 
+        }
+    }
+    // menu for choosing which opponents stats to see
+    public static void see_opp_stats() {
+        // Sets up Scanner, Prints prompt, and takes in prompt
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Opponents Stats");
+        System.out.println("1. " + Globals.enemy_one.name);
+        System.out.println("2. " + Globals.enemy_two.name);
+        System.out.println("3. " + Globals.enemy_three.name);
+        System.out.println("4. " + Globals.enemy_four.name);
+        System.out.println("5. All Opponents Compact view");
+        int choice;
+        do { 
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+        } while (choice < 1 || choice > 5);
+        switch (choice) {
+            case 1:
+                Globals.enemy_one.show_scouted_stats();
+                break;
+            case 2:
+                Globals.enemy_two.show_scouted_stats();
+                break;
+            case 3:
+                Globals.enemy_three.show_scouted_stats();
+                break;
+            case 4:
+                Globals.enemy_four.show_scouted_stats();
+                break;
+            case 5:
+                for (int i = 0; i < 4; i++) {
+                    Enemy_team[] enemies = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
+                    System.out.print(enemies[i].name + "'s Stats: ");
+                    for (int j = 0; j < 6; j++) {
+                        if (enemies[i].revealed_stats[j] == 1) {
+                            System.out.print(enemies[i].stats[j] +", ");
+                        } 
+                        else if (enemies[i].revealed_stats[j] == 2) {
+                            System.out.print(enemies[i].stats[j] +" (Outdated), ");
+                        } 
+                        else {
+                            System.out.print("Not found, ");
+                        }
+                    }
+                    System.out.println();
+                }
+                break;
         }
     }
 
     // Race Days
     public static void race_day() {
-
+        // System.out.println(Arrays.toString(Globals.enemy_one.stats) + ", " + Arrays.toString(Globals.enemy_two.stats) + ", " + Arrays.toString(Globals.enemy_three.stats) + ", "+ Arrays.toString(Globals.enemy_four.stats) + ", "+ Arrays.toString(Globals.player.stats));
+        int[][] stats = {Globals.enemy_one.stats, Globals.enemy_two.stats, Globals.enemy_three.stats, Globals.enemy_four.stats, Globals.player.stats};
+        int[] points = {0, 0, 0, 0, 0};
+        for (int c1 = 0; c1 < 5; c1++) {
+            for (int c2 = 0; c2 < 5; c2++) {
+                if (c1 == c2) {
+                    continue;
+                }
+                int[] team_one = stats[c1];
+                int[] team_two = stats[c2];
+                for (int i = 0; i < 6; i++) {
+                    if (team_one[i] > team_two[i]) {
+                        points[c1] += 1;
+                    }
+                    else if (team_one[i] < team_two[i]) {
+                        points[c2] += 1;
+                    }
+                }   
+            }
+        }
+        Enemy_team[] enemy_by_index = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
+        int[][] team_index_and_points = {
+            {0, points[0]},
+            {1, points[1]},
+            {2, points[2]},
+            {3, points[3]},
+            {4, points[4]} // player
+        };
+        Arrays.sort(team_index_and_points, (o1, o2) -> {
+            // sort by the second element
+            return Integer.compare(o2[1], o1[1]);
+        });
+        int players_place = 0;
+        int players_reward = 0;
+        for (int i = 0; i < 5; i++) {
+            if (team_index_and_points[i][0] == 4) {
+                System.out.print(i+1 +": " + Globals.team_name);
+                players_place = i+1;
+            }
+            else {
+                System.out.print(i+1 + ": " +enemy_by_index[team_index_and_points[i][0]].name);
+            }
+            if (i < 3) {
+                int reward = 250*(3-i);
+                System.out.println(". Prize: $" + reward);
+                if (team_index_and_points[i][0] == 4) {
+                    Globals.bank_account += reward;
+                    players_reward = reward;
+                    Globals.races_lost = 0;
+                }
+            }
+            else {
+                System.out.println(".");
+                if (team_index_and_points[i][0] == 4) {
+                    Globals.races_lost += 1;
+                }
+            }
+        }
+        Globals.add_day_to_week("Race Day: placed " + players_place + " +$" + players_reward);
+        update_opp_stats();
     }
+    // Mark drivers stats as outdated
+    public static void update_opp_stats() {
+        System.out.println("Opponents Teams have developed");
+        Enemy_team[] enemies = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
+        for (int i = 0; i < 4; i++) {
+            enemies[i].develop();
+        }
+    }
+
+    // See Choice Data
 }

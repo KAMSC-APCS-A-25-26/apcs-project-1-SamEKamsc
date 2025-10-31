@@ -1,6 +1,6 @@
 public class Player {
     // Array here for easier access: fitness, intelligence, skill, motor, aerodynamics, structure
-    public int[] stats = {6, 6, 6, 6, 6, 6};
+    public int[] stats = {7, 7, 7, 7, 7, 7};
     public String name;
     public Player(String name) {
         this.name = name;
