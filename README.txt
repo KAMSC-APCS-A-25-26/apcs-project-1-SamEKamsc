@@ -17,11 +17,8 @@ Between races you can do one of the following things each day, some of which cos
     a. Upgrade car motor
     b. Upgrade car aerodynamics
     c. Upgrade car structure
-3. Opponents Stats
-    a. scout out opponents (-$250)
-        you will get random amounts of revealed data, which will be viewable later in the b section
-    b. see found opponents stats
-        this shows the opponents stats. Outdated stats will be shown as such.
+3. Scout Opponents (-$250)
+    you will get random amounts of revealed data, which will be viewable later in the b section
 4. Manage Sponsorships
     a. get a new sponsor:
         choose between three sponsers who will have different rates. You can have up to three sponsers
@@ -30,6 +27,8 @@ Between races you can do one of the following things each day, some of which cos
     a. view Sponsorships
     b. view driver stats
     c. view bank account
+    d. see found opponents stats
+        this shows the opponents stats. Outdated stats will be shown as such.
 As the manager you don't control the car or crew during the race.
 Your driver will placed if based on the amount of stats they have that are bigger than their opponents.
 If you lose a race you have a chance of losing a sponser.

@@ -74,14 +74,17 @@ public class TextAdventure {
         System.out.println("1. Easy");
         System.out.println("2. Normal");
         System.out.println("3. Hard");
-        System.out.print("Enter your choice: ");
-        int choice = sc.nextInt();
-        System.out.println();
+        int choice;
+        do { 
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            System.out.println();
+        } while (choice < 1 || choice > 3);
         switch (choice) {
             case 1:
                 System.out.println("Easy Mode (wimp)");
                 Globals.bank_account = 1500;
-                Globals.difficulty_modifier = 0;
+                Globals.difficulty_modifier = 1;
                 Globals.day = 0;
                 break;
             case 2:
@@ -93,7 +96,7 @@ public class TextAdventure {
             case 3:
                 System.out.println("Hard Mode");
                 Globals.bank_account = 500;
-                Globals.difficulty_modifier = 4;
+                Globals.difficulty_modifier = 3;
                 Globals.day = 0;
                 break;
         }
