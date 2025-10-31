@@ -18,6 +18,7 @@ public class TextAdventure {
             day = ret[0];
             cont = ret[1];
         }
+        Globals.tracker_printer();
     }
 
     public static void main_menu() throws Exception {

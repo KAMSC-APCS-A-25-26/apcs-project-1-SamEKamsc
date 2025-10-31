@@ -18,13 +18,14 @@ public class Enemy_team {
     // handles Enemy scouting, 50% chance of a stat getting revealed.
     public void scout() {
         Random rd = new Random();
+        System.out.println(this.name + "'s Stats");
         for (int i = 0; i < 6; i++) {
             if (rd.nextBoolean()) {
-                System.out.println("Enemy " + titles[i] + ": " + this.stats[i]);
+                System.out.println(titles[i] + ": " + this.stats[i]);
                 this.revealed_stats[i] = 1;
             }
             else {
-                System.out.println("Enemy " + titles[i] + ": not found");
+                System.out.println(titles[i] + ": not found");
             }
         }
     }
@@ -51,7 +52,7 @@ public class Enemy_team {
     public void develop() {
         Random rd = new Random();
         for (int i =0; i < 6; i++) {
-            stats[i] += rd.nextInt(0, 1)*Globals.difficulty_modifier;
+            stats[i] += rd.nextInt(0, Globals.difficulty_modifier);
             if (this.revealed_stats[i] == 1) {
                 this.revealed_stats[i] = 2;
             }
