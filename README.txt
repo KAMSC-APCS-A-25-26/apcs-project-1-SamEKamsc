@@ -1,9 +1,12 @@
 Welcome to the RACE! created by Sam Edmonds
-In this game you are the manager of a racing tean.
+In this game you are the manager of a racing team.
 You must develop a driver and a car to defeat your opponents!
 Your driver and car have stats which will be compared to the enemy teams stats at races.
-There is a race every Sunday and between them you will improve your driver and team.
+The stats are the drivers: fitness, intelligence, and skill and the cars: motor, aerodynamics, structure.
+All of the stats start at level 6. Opponents are random, but harder difficulties increase them.
+There is a race every Sunday and between them you will improve your driver and car, get sponsers, and spy on your opponents.
 You also have a bank account and you gain money from winning races and from sponserships.
+On Easy mode you start with $1500, Normal $1000, and Hard $500.
 This money will be used to develop your car and to scout opponents.
 Between races you can do one of the following things each day, some of which cost money:
 1. Develop driver (-$250):
@@ -14,11 +17,15 @@ Between races you can do one of the following things each day, some of which cos
     a. Upgrade car motor
     b. Upgrade car aerodynamics
     c. Upgrade car structure
-3. Scout out your opponents (-$250)
+3. Opponents Stats
+    a. scout out opponents (-$250)
+        you will get random amounts of revealed data, which will be viewable later in the b section
+    b. see found opponents stats
+        this shows the opponents stats. Outdated stats will be shown as such.
 4. Manage Sponsorships
     a. get a new sponsor:
         choose between three sponsers who will have different rates. You can have up to three sponsers
-    b. create a sponsored video (+$250)
+    b. create a sponsored video (+$200 to 300)
 5. View Stats (won't take the day):
     a. view Sponsorships
     b. view driver stats
