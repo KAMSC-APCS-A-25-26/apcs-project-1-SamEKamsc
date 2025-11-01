@@ -45,6 +45,16 @@ public class Globals {
                 System.out.println("  Day " + (w*7 + d+1) + ": " + tracker.get(w).get(d));
             }
         }
+        System.out.println("players stats: ");
+        player.show_stats();
+        Enemy_team[] enemies = {enemy_one, enemy_two, enemy_three, enemy_four};
+        for (int e = 0; e < 4; e++) {
+            System.out.println(enemies[e].name + " stats: ");
+            for (int i = 0; i < 6; i++) {
+                System.out.print( enemies[e].stats[i] + ", ");
+            }
+            System.out.println();
+        }
     }
 
 }
