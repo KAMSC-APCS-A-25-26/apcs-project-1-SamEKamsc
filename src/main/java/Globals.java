@@ -41,16 +41,19 @@ public class Globals {
     public static void tracker_printer() {
         // print out stuff ig
         for (int w = 0; w < tracker.size(); w++) {
-            System.out.println("Week " + (w+1) + ":");
+            System.out.println("Week " + (w+1) + " (Bank: $" + bank_account + "):");
             for (int d = 0; d < tracker.get(w).size(); d++) {
                 System.out.println("  Day " + (w*7 + d+1) + ": " + tracker.get(w).get(d));
             }
         }
         System.out.println("players stats: ");
-        player.show_stats();
+        for (int i = 0; i < 6; i++) {
+            System.out.print(player.stats[i] + ", ");
+        }
+        
         Enemy_team[] enemies = {enemy_one, enemy_two, enemy_three, enemy_four};
         for (int e = 0; e < 4; e++) {
-            System.out.println(enemies[e].name + " stats: ");
+            System.out.print(enemies[e].name + " stats: ");
             for (int i = 0; i < 6; i++) {
                 System.out.print( enemies[e].stats[i] + ", ");
             }
