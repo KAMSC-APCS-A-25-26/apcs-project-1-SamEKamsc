@@ -49,7 +49,7 @@ public class GameLoop {
             System.out.println("Weekly Development options (Bank: " + Globals.bank_account + ")");
             System.out.println("1. Develop Driver (-$250)");
             System.out.println("2. Develop Car (-$400)");
-            System.out.println("3. Scout Opponents (-$250)");
+            System.out.println("3. Scout Opponents (-$100)");
             System.out.println("4. Manage Sponsors");
             System.out.println("5. See Stats (won't take the day)");
             System.out.print("Enter your choice: ");
@@ -83,7 +83,7 @@ public class GameLoop {
         Scanner sc = new Scanner(System.in);
         System.out.println("Driver Development");
         System.out.println("1. Send Driver to the Gym");
-        System.out.println("2. Send Driver to Watch Film");
+        System.out.println("2. Send Driver to Study Tracks");
         System.out.println("3. Send driver to Practice Driving");
         int choice;
         do { 
@@ -94,7 +94,7 @@ public class GameLoop {
         // uses the choice to upgrade driver
         Globals.player.stats[choice-1] += 1;
         Globals.bank_account -= 250;
-        String[] action = {"the Gym", "Watch Film", "Practice Driving"};
+        String[] action = {"the Gym", "Study Tracks", "Practice Driving"};
         Globals.add_day_to_week("Sent Driver to " + action[choice-1] + " -$250");
     }
 
@@ -137,8 +137,8 @@ public class GameLoop {
         // uses the choice to scout chosen team
         Enemy_team[] enemy_teams = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
         enemy_teams[choice-1].scout();
-        Globals.bank_account -= 250;
-        Globals.add_day_to_week("Scouted " + enemy_teams[choice-1].name + " -$250");
+        Globals.bank_account -= 100;
+        Globals.add_day_to_week("Scouted " + enemy_teams[choice-1].name + " -$100");
     }
 
     // 4. Manage Sponsors

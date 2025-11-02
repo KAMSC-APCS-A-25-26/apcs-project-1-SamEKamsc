@@ -17,7 +17,7 @@ public class Globals {
     public static Enemy_team enemy_four;
 
     // Sponsors
-    public static String[] sponsors_names = {"A", "B", "C", "D", "E", "F", "G"};
+    public static String[] sponsors_names = {"Apple", "Red Bull", "Rolex", "Lenovo", "Amazon", "Ferrari", "Mclaren"};
     //                               total:   600, 550, 500, 450, 400, 350, 300
     public static int[] sponsors_pay_amount ={40,  42,  41,  45,  50,  70, 150};
     public static int[] sponsors_pay_days = { 15,  13,  12,   10,   8,   5,   2}; 
@@ -46,7 +46,7 @@ public class Globals {
                 System.out.println("  Day " + (w*7 + d+1) + ": " + tracker.get(w).get(d));
             }
         }
-        System.out.println("players stats: ");
+        System.out.print("players stats: ");
         for (int i = 0; i < 6; i++) {
             System.out.print(player.stats[i] + ", ");
         }
