@@ -26,8 +26,7 @@ Between races you can do one of the following things each day, some of which cos
 5. View Stats (won't take the day):
     a. view Sponsorships
     b. view driver stats
-    c. view bank account
-    d. see found opponents stats
+    c. see found opponents stats
         this shows the opponents stats. Outdated stats will be shown as such.
 As the manager you don't control the car or crew during the race.
 Your driver will placed if based on the amount of stats they have that are bigger than their opponents.
@@ -35,4 +34,4 @@ If you lose a race you have a chance of losing a sponser.
 Opponents will also improve.
 You lose the game if don't end up on the podium 3 races in a row.
 You also lose if you go bankrupt.
-You win the game if you survive 24 weeks with 24 races.
+You win the game if you survive 14 weeks with 14 races.
