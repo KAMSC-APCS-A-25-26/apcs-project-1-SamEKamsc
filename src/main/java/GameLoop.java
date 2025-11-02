@@ -6,34 +6,35 @@ public class GameLoop {
     public static int[] week_cycler(int day) throws Exception {
         // Cycles through days of the week, keeping track of total days and the days action
         Globals.day += 1;
+        Globals.total_days += 1;
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
         System.out.println("-----------------------------------");
         System.out.println("Day " + Globals.day + ": " + days[day]);
         int next_day = day+1;
         int cont = 1;
         update_sponsor();
-        if (next_day==7) {
+        if (Globals.bank_account <= 0) {
+            System.out.println("You went Bankrupt: Game Over");
+            cont = 0;
+            Globals.add_week_to_tracker();
+        }
+        else if  (Globals.races_lost == 3) {
+            System.out.println("You Lost 3 Games in a Row: Game Over");
+            cont = 0;
+            Globals.add_week_to_tracker();
+        }
+        else if (Globals.total_days >= 98) {
+            System.out.println("You Win: Well Done");
+            cont = 0;
+            Globals.add_week_to_tracker();
+        }
+        else if (next_day==7) {
             next_day = 0;
             race_day();
             Globals.add_week_to_tracker();
         }
         else {
             day_menu();
-        }
-        if (Globals.bank_account <= 0) {
-            System.out.println("You went Bankrupt: Game Over");
-            cont = 0;
-            Globals.add_week_to_tracker();
-        }
-        if  (Globals.races_lost == 3) {
-            System.out.println("You Lost 3 Games in a Row: Game Over");
-            cont = 0;
-            Globals.add_week_to_tracker();
-        }
-        if (day == 168) {
-            System.out.println("You Win: Well Done");
-            cont = 0;
-            Globals.add_week_to_tracker();
         }
         int[] ret = {next_day, cont};
         return ret;

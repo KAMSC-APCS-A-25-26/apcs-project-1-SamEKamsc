@@ -4,6 +4,7 @@ public class Globals {
     // Player
     public static String team_name = "";
     public static int day = 0;
+    public static int total_days = 0;
     public static int bank_account = 0;
     public static int races_lost = 0;
     public static int difficulty_modifier = 0;
