@@ -52,7 +52,7 @@ public class Enemy_team {
     public void develop() {
         Random rd = new Random();
         for (int i = 0; i < 6; i++) {
-            stats[i] += rd.nextInt(0, Globals.difficulty_modifier+1);
+            stats[i] += rd.nextInt(Globals.difficulty_modifier+1);
             if (this.revealed_stats[i] == 1) {
                 this.revealed_stats[i] = 2;
             }

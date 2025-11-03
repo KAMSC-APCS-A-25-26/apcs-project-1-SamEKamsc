@@ -161,7 +161,7 @@ public class GameLoop {
                 break;
             case 2:
                 Random rd = new Random();
-                int money = rd.nextInt(200, 301);
+                int money = rd.nextInt(101)+200;
                 Globals.bank_account += money;
                 System.out.println("Sponsored Advertisment made. Bank +$" + money);
                 Globals.add_day_to_week("Created Sponsored Advertisment +$" + money);
@@ -175,7 +175,7 @@ public class GameLoop {
         int[] chosen_sponsors = {0, 0, 0};
         while (amount_chosen < 3) {
             Random rd = new Random();
-            int random_index = rd.nextInt(0, 7);
+            int random_index = rd.nextInt(7);
             boolean valid_sponsor = true;
             if (Globals.sponsors_days_left[random_index] != 0) {
                 valid_sponsor = false;
