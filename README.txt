@@ -4,8 +4,8 @@ You must develop a driver and a car to defeat your opponents!
 Your driver and car have stats which will be compared to the enemy teams stats at races.
 The stats are the drivers: fitness, intelligence, and skill and the cars: motor, aerodynamics, structure.
 All of the stats start at level 7. Opponents are random, but harder difficulties increase them.
-There is a race every Sunday and between them you will improve your driver and car, get sponsers, and spy on your opponents.
-You also have a bank account and you gain money from winning races and from sponserships.
+There is a race every Sunday and between them you will improve your driver and car, get sponsors, and spy on your opponents.
+You also have a bank account and you gain money from winning races and from sponsorships.
 On Easy mode you start with $1500, Normal $1000, and Hard $500.
 This money will be used to develop your car and to scout opponents.
 Between races you can do one of the following things each day, some of which cost money:
@@ -29,8 +29,7 @@ Between races you can do one of the following things each day, some of which cos
     c. see found opponents stats
         this shows the opponents stats. Outdated stats will be shown as such.
 As the manager you don't control the car or crew during the race.
-Your driver will placed if based on the amount of stats they have that are bigger than their opponents.
-If you lose a race you have a chance of losing a sponser.
+Your driver will placed based on the amount of stats they have that are bigger than their opponents.
 Opponents will also improve.
 You lose the game if don't end up on the podium 3 races in a row.
 You also lose if you go bankrupt.
