@@ -4,13 +4,17 @@ import java.util.Scanner;
 
 public class TextAdventure {
     public static void main(String[] args) throws Exception {
+        // Calls the main menu to shows the title, get a team name, and teach the player to play.
         TextAdventure.main_menu();
+        // Calls the choose_difficulty function to choose difficulty.
         TextAdventure.choose_difficulty();
+        // Creates the player and the enemy objects
         Globals.player = new Player(Globals.team_name);
         Globals.enemy_one = new Enemy_team("Polytrack Pitmasters");
         Globals.enemy_two = new Enemy_team("Houtrouw Hyperdrivers");
         Globals.enemy_three = new Enemy_team("Afsal Accelerators");
         Globals.enemy_four = new Enemy_team("Coding Cornercutters");
+        // sets up a day counter and a infinite loop to determine when the game ends
         int cont = 1;
         int day = 0;
         while (cont == 1) {
@@ -18,6 +22,7 @@ public class TextAdventure {
             day = ret[0];
             cont = ret[1];
         }
+        // prints out the players and enemies stats as well as the players choices
         Globals.tracker_printer();
     }
 
@@ -25,7 +30,7 @@ public class TextAdventure {
         // Declare Scanners
         Scanner sc = new Scanner(System.in);
         Scanner readme_sc = new Scanner(new File("README.txt"));
-        // Print Title
+        // Print Title using ASCII art
         System.out.println("=======================================");
         System.out.println("                  THE");
         System.out.println("Γ ‾ ‾ ⅂    Γ ‾ ‾ ⅂    Γ ‾ ‾ ‾   Γ ‾ ‾ ‾");
@@ -47,12 +52,14 @@ public class TextAdventure {
             choice_one = sc.nextInt();
             System.out.println();
             switch (choice_one) {
+                // If play is chosen, asks for team name and continues on
                 case 1:
                     Scanner special = new Scanner(System.in).useDelimiter("[\n]+");
                     System.out.println("---------------------");
                     System.out.print("Enter your team name: ");
                     Globals.team_name = special.nextLine();
                     break;
+                // if how to play is chosen, prints out the readme doc
                 case 2:
                     System.out.println();
                     while (readme_sc.hasNext()) {
@@ -69,6 +76,7 @@ public class TextAdventure {
     }
 
     public static void choose_difficulty() throws Exception {
+        // Creates scanner and prompts for difficulty.
         Scanner sc = new Scanner(System.in);
         System.out.println("-----------------");
         System.out.println("Choose Difficulty");
@@ -81,6 +89,7 @@ public class TextAdventure {
             choice = sc.nextInt();
             System.out.println();
         } while (choice < 1 || choice > 3);
+        // Sets global variables up for the difficulty.
         switch (choice) {
             case 1:
                 System.out.println("Easy Mode (wimp)");

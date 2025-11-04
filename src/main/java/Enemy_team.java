@@ -11,7 +11,7 @@ public class Enemy_team {
         this.name = name;
         Random rd = new Random();
         for (int i = 0; i < 6; i++) {
-            this.stats[i] = rd.nextInt(6)+Globals.difficulty_modifier+3;
+            this.stats[i] = rd.nextInt(6)+Globals.difficulty_modifier+2;
         }
     }
 
@@ -51,6 +51,7 @@ public class Enemy_team {
     // Upgrades all the stats
     public void develop() {
         Random rd = new Random();
+        int total_upgrades = Globals.difficulty_modifier*3+3;
         for (int i = 0; i < 6; i++) {
             stats[i] += rd.nextInt(Globals.difficulty_modifier+1);
             if (this.revealed_stats[i] == 1) {

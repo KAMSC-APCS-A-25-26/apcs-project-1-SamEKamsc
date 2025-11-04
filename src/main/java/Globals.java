@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class Globals {
+    // Global script with variables accessed by all objects
+
     // Player
     public static String team_name = "";
     public static int day = 0;
@@ -29,17 +31,19 @@ public class Globals {
     public static ArrayList<String> week_tracker = new ArrayList<>();
         // ^^ format so { {week#, day#, [place/choice], money_change, final_bank}, {...}, ...}
     public static void add_day_to_week(String action) {
+        // adds a day to the week_tracker ArrayList
         week_tracker.add(action);
     }
     
     public static void add_week_to_tracker() {
+        // adds a week to the tracker ArrayList
         ArrayList<String> copy = new ArrayList<>(week_tracker);
         tracker.add(copy);
         week_tracker.clear();
     }
     
     public static void tracker_printer() {
-        // print out stuff ig
+        // print out the choices beautifully
         for (int w = 0; w < tracker.size(); w++) {
             System.out.println("Week " + (w+1) + ":");
             for (int d = 0; d < tracker.get(w).size(); d++) {
