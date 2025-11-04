@@ -53,7 +53,12 @@ public class Enemy_team {
         Random rd = new Random();
         int total_upgrades = Globals.difficulty_modifier*3+3;
         for (int i = 0; i < 6; i++) {
-            stats[i] += rd.nextInt(Globals.difficulty_modifier+1);
+            if (total_upgrades >= Globals.difficulty_modifier+1) {
+                stats[i] += rd.nextInt(0, Globals.difficulty_modifier+1);
+            }
+            else {
+                stats[i] += rd.nextInt(0, total_upgrades);
+            }
             if (this.revealed_stats[i] == 1) {
                 this.revealed_stats[i] = 2;
             }
