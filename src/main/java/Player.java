@@ -6,6 +6,7 @@ public class Player {
         this.name = name;
     }
 
+    // prints out the players stats
     public void show_stats() {
         String[] part = {"driver fitness", "driver intelligence", "driver skill", "car motor", "car aerodynamics", "car structure"};
         for (int i = 0; i < 6; i++) {

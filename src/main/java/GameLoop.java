@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class GameLoop {
     public static int[] week_cycler(int day) throws Exception {
-        // Cycles through days of the week, keeping track of total days and the days action
+        // Cycles through days of the week
         Globals.day += 1;
         Globals.total_days += 1;
         String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
@@ -12,30 +12,37 @@ public class GameLoop {
         System.out.println("Day " + Globals.day + ": " + days[day]);
         int next_day = day+1;
         int cont = 1;
+        // makes sponsors pay out
         update_sponsor();
+        // Game Lose #1
         if (Globals.bank_account <= 0) {
             System.out.println("You went Bankrupt: Game Over");
             cont = 0;
             Globals.add_week_to_tracker();
         }
+        // Game Lose #2
         else if  (Globals.races_lost == 3) {
             System.out.println("You Lost 3 Games in a Row: Game Over");
             cont = 0;
             Globals.add_week_to_tracker();
         }
+        // Game Win 
         else if (Globals.total_days >= 98) {
             System.out.println("You Win: Well Done");
             cont = 0;
             Globals.add_week_to_tracker();
         }
+        // updates the player choice tracker
         else if (next_day==7) {
             next_day = 0;
             race_day();
             Globals.add_week_to_tracker();
         }
+        // runs the day
         else {
             day_menu();
         }
+        // returns the next day and if the game should continue looping
         int[] ret = {next_day, cont};
         return ret;
     }
@@ -130,7 +137,7 @@ public class GameLoop {
         System.out.println("4. " + Globals.enemy_four.name);
         int choice;
         do { 
-            System.out.print("Enter your choice: ");  // UPDATE TS SO THAT IT DOES WHAT IT SAYS IN REAMDE AND MAKE Sure player knows what is out of date
+            System.out.print("Enter your choice: ");
             choice = sc.nextInt();
             System.out.println();
         } while (choice < 1 || choice > 4);
@@ -170,7 +177,9 @@ public class GameLoop {
     }
     // menu for choosing which sponsor to get
     public static void choose_sponser() {
+        // Creates scanner object
         Scanner sc = new Scanner(System.in);
+        // Chooses three different possible unclaimed sponsors
         int amount_chosen = 0;
         int[] chosen_sponsors = {0, 0, 0};
         while (amount_chosen < 3) {
@@ -190,7 +199,8 @@ public class GameLoop {
                 amount_chosen += 1;
             }
         }
-        System.out.println("Choose Sponser:");
+        // prompts uses for whats sponsor to buy
+        System.out.println("Choose Sponsor:");
         for (int i = 0; i < 3; i++) {
             System.out.print((i+1) + ". " + Globals.sponsors_names[chosen_sponsors[i]]);
             System.out.print(": $" + Globals.sponsors_pay_amount[chosen_sponsors[i]]);
@@ -202,12 +212,14 @@ public class GameLoop {
             choice = sc.nextInt();
             System.out.println();
         } while (choice < 1 || choice > 3);
+        // Get the Sponsor of choice
         Globals.sponsors_days_left[chosen_sponsors[choice-1]] = Globals.sponsors_pay_days[chosen_sponsors[choice-1]];
         Globals.number_of_sponsors += 1;
         Globals.add_day_to_week("Signed Contract with " + Globals.sponsors_names[chosen_sponsors[choice-1]] + " +$" + Globals.sponsors_pay_amount[chosen_sponsors[choice-1]] + " for " + Globals.sponsors_pay_days[chosen_sponsors[choice-1]] + " days");
     }
     // updates pay and reduces the aamount of day left on a sponsor
     public static void update_sponsor() {
+        // reduces days left on sponsor and adds rate to bank
         for (int i = 0; i < 7; i++) {
             if (Globals.sponsors_days_left[i] >= 1) {
                 Globals.bank_account += Globals.sponsors_pay_amount[i];
@@ -271,6 +283,7 @@ public class GameLoop {
             choice = sc.nextInt();
             System.out.println();
         } while (choice < 1 || choice > 5);
+        // Shows the driver of choices stats
         switch (choice) {
             case 1:
                 Globals.enemy_one.show_scouted_stats();
@@ -285,6 +298,7 @@ public class GameLoop {
                 Globals.enemy_four.show_scouted_stats();
                 break;
             case 5:
+                // Shows all the drivers stats formatted well
                 for (int i = 0; i < 4; i++) {
                     Enemy_team[] enemies = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
                     System.out.print(enemies[i].name + "'s Stats: ");
@@ -307,8 +321,9 @@ public class GameLoop {
 
     // Race Days
     public static void race_day() {
-        // System.out.println(Arrays.toString(Globals.enemy_one.stats) + ", " + Arrays.toString(Globals.enemy_two.stats) + ", " + Arrays.toString(Globals.enemy_three.stats) + ", "+ Arrays.toString(Globals.enemy_four.stats) + ", "+ Arrays.toString(Globals.player.stats));
+        // Gets all the enemies and players stats into an array
         int[][] stats = {Globals.enemy_one.stats, Globals.enemy_two.stats, Globals.enemy_three.stats, Globals.enemy_four.stats, Globals.player.stats};
+        // makes an array of how many points a team earns in a race. In  the same order as list above
         int[] points = {0, 0, 0, 0, 0};
         for (int c1 = 0; c1 < 5; c1++) {
             for (int c2 = 0; c2 < 5; c2++) {
@@ -327,6 +342,7 @@ public class GameLoop {
                 }   
             }
         }
+        // determines winner by giving each team an array of their unique index and their scored points
         Enemy_team[] enemy_by_index = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
         int[][] team_index_and_points = {
             {0, points[0]},
@@ -335,10 +351,11 @@ public class GameLoop {
             {3, points[3]},
             {4, points[4]} // player
         };
+        // sorts to get order of placement
         Arrays.sort(team_index_and_points, (o1, o2) -> {
-            // sort by the second element
             return Integer.compare(o2[1], o1[1]);
         });
+        // outputs winners and updates bank account of player
         int players_place = 0;
         int players_reward = 0;
         for (int i = 0; i < 5; i++) {
@@ -370,6 +387,7 @@ public class GameLoop {
     }
     // Mark drivers stats as outdated
     public static void update_opp_stats() {
+        // Develops the opponent drivers stats
         System.out.println("Opponents Teams have developed");
         Enemy_team[] enemies = {Globals.enemy_one, Globals.enemy_two, Globals.enemy_three, Globals.enemy_four};
         for (int i = 0; i < 4; i++) {
